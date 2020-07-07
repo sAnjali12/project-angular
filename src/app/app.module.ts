@@ -4,29 +4,30 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'
+import "@angular/compiler"
 
 
 
 import { AppComponent } from './app.component'
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './user/login/login.component'
 import { HomeComponent } from './home/home.component'
-import { AuthService } from './auth.service'
-// import { AuthGuardService } from './auth-guard.service'
+import { AuthService } from './auth.service';
+import { UserComponent } from './user/user.component'
+import { AuthGuardService } from './auth-guard.service'
 
 const routes: Routes = [
+  {path: 'home',component: HomeComponent,canActivate: [AuthGuardService]},
   { path: 'login', component: LoginComponent },
-  {
-    path: 'home',
-    component: HomeComponent,
-    // canActivate: [AuthGuardService]
-  }
+  { path: '', redirectTo: '/login', pathMatch: 'full'  }
+
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [AuthService,
-    // AuthGuardService
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
