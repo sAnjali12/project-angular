@@ -345,6 +345,12 @@ class LoginComponent {
         this.notifyMessage = '';
     }
     ngOnInit() {
+        this.initForm();
+        this.route.params.subscribe((params) => {
+            if (params['registered'] === 'success') {
+                this.notifyMessage = "You have been successfuly registerd, you can login now!";
+            }
+        });
     }
     initForm() {
         this.loginForm = this.fb.group({
@@ -360,6 +366,7 @@ class LoginComponent {
         return this.loginForm.controls[fieldName].errors.required;
     }
     login() {
+        console.log(this.loginForm.value);
         this.auth.login(this.loginForm.value).subscribe((token) => {
             this.router.navigate(['/home']);
         }, (errorResponse) => {
@@ -368,7 +375,7 @@ class LoginComponent {
     }
 }
 LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"])); };
-LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LoginComponent, selectors: [["app-login"]], decls: 20, vars: 3, consts: [["id", "login"], [1, "bwm-form"], [1, "row"], [1, "col-md-5"], [1, "page-title"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "emailOrPhone"], ["type", "text", "placeholder", "Enter emailOrPhone", "name", "emailOrPhone", "required", "", "formControlName", "emailOrPhone"], ["class", "alert alert-danger", 4, "ngIf"], ["for", "password"], ["type", "password", "placeholder", "Enter password", "name", "password", "required", "", "formControlName", "password"], ["type", "submit", 1, "btn", "btn-bwm", 3, "disabled"], [1, "alert", "alert-danger"], [4, "ngIf"]], template: function LoginComponent_Template(rf, ctx) { if (rf & 1) {
+LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LoginComponent, selectors: [["app-login"]], decls: 20, vars: 3, consts: [["id", "login"], [1, "bwm-form"], [1, "row"], [1, "col-md-5"], [1, "page-title"], [3, "formGroup"], [1, "form-group"], ["for", "emailOrPhone"], ["type", "text", "placeholder", "Enter emailOrPhone", "name", "emailOrPhone", "required", "", "formControlName", "emailOrPhone"], ["class", "alert alert-danger", 4, "ngIf"], ["for", "password"], ["type", "password", "placeholder", "Enter password", "name", "password", "required", "", "formControlName", "password"], ["type", "submit", 1, "btn", "btn-bwm", 3, "disabled", "click"], [1, "alert", "alert-danger"], [4, "ngIf"]], template: function LoginComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -377,7 +384,6 @@ LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Login");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "form", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_6_listener() { return ctx.login(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "label", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "b");
@@ -396,6 +402,7 @@ LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](17, "input", 11);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_18_listener() { return ctx.login(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Submit");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();

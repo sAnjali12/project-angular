@@ -19,8 +19,13 @@ export class LoginComponent implements OnInit {
               private route:ActivatedRoute) { }
 
   ngOnInit() {
-   
-    
+    this.initForm();
+    this.route.params.subscribe((params)=>{
+      if(params['registered']==='success'){
+        this.notifyMessage="You have been successfuly registerd, you can login now!"
+      }
+
+    })
   }
 
   initForm(){
@@ -42,6 +47,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    console.log(this.loginForm.value)
     this.auth.login(this.loginForm.value).subscribe(
       (token)=>{
         this.router.navigate(['/home']);
@@ -54,5 +60,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
-
-

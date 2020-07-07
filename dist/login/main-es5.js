@@ -656,7 +656,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _createClass(LoginComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          var _this2 = this;
+
+          this.initForm();
+          this.route.params.subscribe(function (params) {
+            if (params['registered'] === 'success') {
+              _this2.notifyMessage = "You have been successfuly registerd, you can login now!";
+            }
+          });
+        }
       }, {
         key: "initForm",
         value: function initForm() {
@@ -678,12 +687,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "login",
         value: function login() {
-          var _this2 = this;
+          var _this3 = this;
 
+          console.log(this.loginForm.value);
           this.auth.login(this.loginForm.value).subscribe(function (token) {
-            _this2.router.navigate(['/home']);
+            _this3.router.navigate(['/home']);
           }, function (errorResponse) {
-            _this2.errors = errorResponse.error.errors;
+            _this3.errors = errorResponse.error.errors;
           });
         }
       }]);
@@ -700,7 +710,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-login"]],
       decls: 20,
       vars: 3,
-      consts: [["id", "login"], [1, "bwm-form"], [1, "row"], [1, "col-md-5"], [1, "page-title"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "emailOrPhone"], ["type", "text", "placeholder", "Enter emailOrPhone", "name", "emailOrPhone", "required", "", "formControlName", "emailOrPhone"], ["class", "alert alert-danger", 4, "ngIf"], ["for", "password"], ["type", "password", "placeholder", "Enter password", "name", "password", "required", "", "formControlName", "password"], ["type", "submit", 1, "btn", "btn-bwm", 3, "disabled"], [1, "alert", "alert-danger"], [4, "ngIf"]],
+      consts: [["id", "login"], [1, "bwm-form"], [1, "row"], [1, "col-md-5"], [1, "page-title"], [3, "formGroup"], [1, "form-group"], ["for", "emailOrPhone"], ["type", "text", "placeholder", "Enter emailOrPhone", "name", "emailOrPhone", "required", "", "formControlName", "emailOrPhone"], ["class", "alert alert-danger", 4, "ngIf"], ["for", "password"], ["type", "password", "placeholder", "Enter password", "name", "password", "required", "", "formControlName", "password"], ["type", "submit", 1, "btn", "btn-bwm", 3, "disabled", "click"], [1, "alert", "alert-danger"], [4, "ngIf"]],
       template: function LoginComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
@@ -718,10 +728,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "form", 5);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_6_listener() {
-            return ctx.login();
-          });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 6);
 
@@ -758,6 +764,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 12);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_18_listener() {
+            return ctx.login();
+          });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Submit");
 
